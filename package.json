@@ -1,6 +1,6 @@
 {
   "name": "wp-prettier",
-  "version": "0.22.0",
+  "version": "0.22.1",
   "description": "A fork of prettier to conform with wp-calypso styleguide",
   "bin": {
     "prettier": "./bin/prettier.js"

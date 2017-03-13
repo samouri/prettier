@@ -844,7 +844,7 @@ function genericPrintNoParens(path, options, print) {
                 /* sameIndent */ true
               ),
               softline,
-              " ]"
+              "]"
             ])
           )
         );
@@ -993,10 +993,11 @@ function genericPrintNoParens(path, options, print) {
               options.tabWidth,
               concat([softline, path.call(print, "test")])
             ),
+            " ", // hack to support only putting the extra space for closing parens that are not immediately after newlines
             softline
           ])
         ),
-        " )",
+        ")",
         con
       ];
 
@@ -2008,8 +2009,9 @@ function printArgumentsList(path, options, print) {
         concat([softline, join(concat([",", line]), printed)])
       ),
       ifBreak(shouldPrintComma(options, "all") ? "," : ""),
+      " ", // hack to add extra whitespace as before parens but not for newline
       softline,
-      " )"
+      ")"
     ]),
     { shouldBreak: printed.some(willBreak) }
   );
