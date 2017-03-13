@@ -114,13 +114,13 @@ function genericPrint(path, options, printPath, args) {
   }
 
   if (needsParens) {
-    parts.unshift("(");
+    parts.unshift("( ");
   }
 
   parts.push(linesWithoutParens);
 
   if (needsParens) {
-    parts.push(")");
+    parts.push(" )");
   }
 
   return concat(parts);
@@ -182,7 +182,7 @@ function genericPrintNoParens(path, options, print, args) {
     case "ExpressionStatement":
       return concat([path.call(print, "expression"), semi]); // Babel extension.
     case "ParenthesizedExpression":
-      return concat(["(", path.call(print, "expression"), ")"]);
+      return concat(["( ", path.call(print, "expression"), " )"]);
     case "AssignmentExpression":
       return printAssignment(
         n.left,
@@ -575,7 +575,7 @@ function genericPrintNoParens(path, options, print, args) {
         return "{}";
       }
 
-      parts.push("{");
+      parts.push("{ ");
 
       // Babel 6
       if (hasDirectives) {
@@ -589,7 +589,7 @@ function genericPrintNoParens(path, options, print, args) {
       }
 
       parts.push(comments.printDanglingComments(path, options));
-      parts.push(hardline, "}");
+      parts.push(hardline, "} ");
 
       return concat(parts);
     }
@@ -661,7 +661,7 @@ function genericPrintNoParens(path, options, print, args) {
         return concat([
           path.call(print, "callee"),
           path.call(print, "typeParameters"),
-          concat(["(", join(", ", path.map(print, "arguments")), ")"])
+          concat(["( ", join(", ", path.map(print, "arguments")), " )"])
         ]);
       }
 
@@ -1290,17 +1290,17 @@ function genericPrintNoParens(path, options, print, args) {
 
       if (shouldInline) {
         return group(
-          concat(["{", path.call(print, "expression"), lineSuffixBoundary, "}"])
+          concat(["{ ", path.call(print, "expression"), lineSuffixBoundary, " }"])
         );
       }
 
       return group(
         concat([
-          "{",
+          "{ ",
           indent(concat([softline, path.call(print, "expression")])),
           softline,
           lineSuffixBoundary,
-          "}"
+          " }"
         ])
       );
     }
@@ -2199,31 +2199,31 @@ function printArgumentsList(path, options, print) {
       printed.some(willBreak) ? breakParent : "",
       conditionalGroup(
         [
-          concat(["(", join(concat([", "]), printedExpanded), ")"]),
+          concat(["( ", join(concat([", "]), printedExpanded), " )"]),
           shouldGroupFirst
             ? concat([
-                "(",
+                "( ",
                 group(printedExpanded[0], { shouldBreak: true }),
                 printed.length > 1 ? ", " : "",
                 join(concat([",", line]), printed.slice(1)),
-                ")"
+                " )"
               ])
             : concat([
-                "(",
+                "( ",
                 join(concat([",", line]), printed.slice(0, -1)),
                 printed.length > 1 ? ", " : "",
                 group(util.getLast(printedExpanded), {
                   shouldBreak: true
                 }),
-                ")"
+                " )"
               ]),
           group(
             concat([
-              "(",
+              "( ",
               indent(concat([line, join(concat([",", line]), printed)])),
               shouldPrintComma(options, "all") ? "," : "",
               line,
-              ")"
+              " )"
             ]),
             { shouldBreak: true }
           )
@@ -2235,11 +2235,11 @@ function printArgumentsList(path, options, print) {
 
   return group(
     concat([
-      "(",
+      "( ",
       indent(concat([softline, join(concat([",", line]), printed)])),
       ifBreak(shouldPrintComma(options, "all") ? "," : ""),
       softline,
-      ")"
+      " )"
     ]),
     { shouldBreak: printed.some(willBreak) }
   );
@@ -2341,13 +2341,13 @@ function printFunctionParams(path, print, options, expandArg) {
     !fun.rest;
 
   return concat([
-    isFlowShorthandWithOneArg ? "" : "(",
+    isFlowShorthandWithOneArg ? "" : "( ",
     indent(concat([softline, join(concat([",", line]), printed)])),
     ifBreak(
       canHaveTrailingComma && shouldPrintComma(options, "all") ? "," : ""
     ),
     softline,
-    isFlowShorthandWithOneArg ? "" : ")"
+    isFlowShorthandWithOneArg ? "" : " )"
   ]);
 }
 
