@@ -841,7 +841,7 @@ function genericPrintNoParens(path, options, print, args) {
         parts.push(
           group(
             concat([
-              "[",
+              "[ ",
               indent(
                 concat([
                   softline,
@@ -862,7 +862,7 @@ function genericPrintNoParens(path, options, print, args) {
                 /* sameIndent */ true
               ),
               softline,
-              "]"
+              " ]"
             ])
           )
         );
