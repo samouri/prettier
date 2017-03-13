@@ -753,7 +753,7 @@ function genericPrintNoParens(path, options, print) {
         parts.push(path.call(print, "value"));
       } else {
         if (n.computed) {
-          parts.push("[", path.call(print, "key"), "]");
+          parts.push("[ ", path.call(print, "key"), " ]");
         } else {
           parts.push(printPropertyKey(path, options, print));
         }
@@ -890,7 +890,7 @@ function genericPrintNoParens(path, options, print) {
     case "UnaryExpression":
       parts.push(n.operator);
 
-      if (/[a-z]$/.test(n.operator)) parts.push(" ");
+      parts.push(" ");
 
       parts.push(path.call(print, "argument"));
 
