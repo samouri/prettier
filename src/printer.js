@@ -977,7 +977,7 @@ function genericPrintNoParens(path, options, print) {
         : path.call(print, "id");
     case "WithStatement":
       return concat([
-        "with (",
+        "with ( ",
         path.call(print, "object"),
         ")",
         adjustClause(path.call(print, "body"), options)
@@ -986,7 +986,7 @@ function genericPrintNoParens(path, options, print) {
       const con = adjustClause(path.call(print, "consequent"), options);
 
       parts = [
-        "if (",
+        "if ( ",
         group(
           concat([
             indent(
@@ -996,7 +996,7 @@ function genericPrintNoParens(path, options, print) {
             softline
           ])
         ),
-        ")",
+        " )",
         con
       ];
 
@@ -1042,7 +1042,7 @@ function genericPrintNoParens(path, options, print) {
 
       return concat([
         printedComments,
-        "for (",
+        "for ( ",
         group(
           concat([
             indent(
@@ -1061,13 +1061,13 @@ function genericPrintNoParens(path, options, print) {
             softline
           ])
         ),
-        ")",
+        " )",
         body
       ]);
     }
     case "WhileStatement":
       return concat([
-        "while (",
+        "while ( ",
         group(
           concat([
             indent(
@@ -1077,35 +1077,35 @@ function genericPrintNoParens(path, options, print) {
             softline
           ])
         ),
-        ")",
+        " )",
         adjustClause(path.call(print, "body"), options)
       ]);
     case "ForInStatement":
       // Note: esprima can't actually parse "for each (".
       return concat([
-        n.each ? "for each (" : "for (",
+        n.each ? "for each ( " : "for ( ",
         path.call(print, "left"),
         " in ",
         path.call(print, "right"),
-        ")",
+        " )",
         adjustClause(path.call(print, "body"), options)
       ]);
     case "ForOfStatement":
       return concat([
-        "for (",
+        "for ( ",
         path.call(print, "left"),
         " of ",
         path.call(print, "right"),
-        ")",
+        " )",
         adjustClause(path.call(print, "body"), options)
       ]);
     case "ForAwaitStatement":
       return concat([
-        "for await (",
+        "for await ( ",
         path.call(print, "left"),
         " of ",
         path.call(print, "right"),
-        ")",
+        " )",
         adjustClause(path.call(print, "body"), options)
       ]);
     case "DoWhileStatement":
@@ -1117,7 +1117,7 @@ function genericPrintNoParens(path, options, print) {
       if (hasBraces) parts.push(" while");
       else parts.push(concat([line, "while"]));
 
-      parts.push(" (", path.call(print, "test"), ");");
+      parts.push(" ( ", path.call(print, "test"), " );");
 
       return concat(parts);
     case "DoExpression":
@@ -1168,13 +1168,13 @@ function genericPrintNoParens(path, options, print) {
 
       return concat(parts);
     case "CatchClause":
-      parts.push("catch (", path.call(print, "param"));
+      parts.push("catch ( ", path.call(print, "param"));
 
       if (n.guard)
         // Note: esprima does not recognize conditional catch clauses.
         parts.push(" if ", path.call(print, "guard"));
 
-      parts.push(") ", path.call(print, "body"));
+      parts.push(" ) ", path.call(print, "body"));
 
       return concat(parts);
     case "ThrowStatement":
@@ -1182,9 +1182,9 @@ function genericPrintNoParens(path, options, print) {
     // Note: ignoring n.lexical because it has no printing consequences.
     case "SwitchStatement":
       return concat([
-        "switch (",
+        "switch ( ",
         path.call(print, "discriminant"),
-        ") {",
+        " ) {",
         n.cases.length > 0
           ? indent(
               options.tabWidth,
@@ -2066,7 +2066,7 @@ function printFunctionParams(path, print, options) {
     util.getLast(parent.arguments) === path.getValue() &&
     shouldGroupLastArg(parent.arguments)
   ) {
-    return concat(["(", join(", ", printed), ")"]);
+    return concat(["( ", join(", ", printed), " )"]);
   }
 
   return concat([
