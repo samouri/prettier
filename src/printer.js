@@ -569,7 +569,7 @@ function genericPrintNoParens(path, options, print) {
         return "{}";
       }
 
-      parts.push("{ ");
+      parts.push("{");
 
       // Babel 6
       if (hasDirectives) {
@@ -591,7 +591,7 @@ function genericPrintNoParens(path, options, print) {
       }
 
       parts.push(comments.printDanglingComments(path, options));
-      parts.push(hardline, "} ");
+      parts.push(hardline, "}");
 
       return concat(parts);
     }
@@ -1247,7 +1247,7 @@ function genericPrintNoParens(path, options, print) {
         path.call(print, "property")
       ]);
     case "JSXSpreadAttribute":
-      return concat(["{...", path.call(print, "argument"), "}"]);
+      return concat(["{ ...", path.call(print, "argument"), " }"]);
     case "JSXExpressionContainer": {
       const parent = path.getParentNode(0);
 
@@ -1433,10 +1433,10 @@ function genericPrintNoParens(path, options, print) {
 
           if (i < expressions.length) {
             parts.push(
-              "${",
+              "${ ",
               removeLines(expressions[i]),
               lineSuffixBoundary,
-              "}"
+              " }"
             );
           }
         },
@@ -2272,14 +2272,14 @@ function printMemberLookup(path, options, print) {
   return concat(
     n.computed
       ? [
-          "[",
+          "[ ",
           group(
             concat([
               indent(options.tabWidth, concat([softline, property])),
               softline
             ])
           ),
-          "]"
+          " ]"
         ]
       : [".", property]
   );
