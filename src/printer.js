@@ -989,7 +989,7 @@ function genericPrintNoParens(path, options, print, args) {
       );
     case "WithStatement":
       return concat([
-        "with (",
+        "with ( ",
         path.call(print, "object"),
         ")",
         adjustClause(n.body, path.call(print, "body"))
@@ -998,14 +998,14 @@ function genericPrintNoParens(path, options, print, args) {
       const con = adjustClause(n.consequent, path.call(print, "consequent"));
       const opening = group(
         concat([
-          "if (",
+          "if ( ",
           group(
             concat([
               indent(concat([softline, path.call(print, "test")])),
               softline
             ])
           ),
-          ")",
+          " )",
           con
         ])
       );
@@ -1050,7 +1050,7 @@ function genericPrintNoParens(path, options, print, args) {
 
       return concat([
         printedComments,
-        "for (",
+        "for ( ",
         group(
           concat([
             indent(
@@ -1068,30 +1068,30 @@ function genericPrintNoParens(path, options, print, args) {
             softline
           ])
         ),
-        ")",
+        " )",
         body
       ]);
     }
     case "WhileStatement":
       return concat([
-        "while (",
+        "while ( ",
         group(
           concat([
             indent(concat([softline, path.call(print, "test")])),
             softline
           ])
         ),
-        ")",
+        " )",
         adjustClause(n.body, path.call(print, "body"))
       ]);
     case "ForInStatement":
       // Note: esprima can't actually parse "for each (".
       return concat([
-        n.each ? "for each (" : "for (",
+        n.each ? "for each ( " : "for ( ",
         path.call(print, "left"),
         " in ",
         path.call(print, "right"),
-        ")",
+        " )",
         adjustClause(n.body, path.call(print, "body"))
       ]);
 
@@ -1105,11 +1105,11 @@ function genericPrintNoParens(path, options, print, args) {
       return concat([
         "for",
         isAwait ? " await" : "",
-        " (",
+        " ( ",
         path.call(print, "left"),
         " of ",
         path.call(print, "right"),
-        ")",
+        " )",
         adjustClause(n.body, path.call(print, "body"))
       ]);
 
@@ -1125,7 +1125,7 @@ function genericPrintNoParens(path, options, print, args) {
       }
       parts.push("while");
 
-      parts.push(" (", path.call(print, "test"), ")", semi);
+      parts.push(" ( ", path.call(print, "test"), " )", semi);
 
       return concat(parts);
     case "DoExpression":
@@ -1173,13 +1173,13 @@ function genericPrintNoParens(path, options, print, args) {
 
       return concat(parts);
     case "CatchClause":
-      parts.push("catch (", path.call(print, "param"));
+      parts.push("catch ( ", path.call(print, "param"));
 
       if (n.guard)
         // Note: esprima does not recognize conditional catch clauses.
         parts.push(" if ", path.call(print, "guard"));
 
-      parts.push(") ", path.call(print, "body"));
+      parts.push(" ) ", path.call(print, "body"));
 
       return concat(parts);
     case "ThrowStatement":
@@ -1187,9 +1187,9 @@ function genericPrintNoParens(path, options, print, args) {
     // Note: ignoring n.lexical because it has no printing consequences.
     case "SwitchStatement":
       return concat([
-        "switch (",
+        "switch ( ",
         path.call(print, "discriminant"),
-        ") {",
+        " ) {",
         n.cases.length > 0
           ? indent(concat([hardline, join(hardline, path.map(print, "cases"))]))
           : "",
@@ -2308,7 +2308,7 @@ function printFunctionParams(path, print, options, expandArg) {
         fun.params[0].typeAnnotation.type === "ObjectTypeAnnotation")) &&
     !fun.rest
   ) {
-    return concat(["(", join(", ", printed), ")"]);
+    return concat(["( ", join(", ", printed), " )"]);
   }
 
   const parent = path.getParentNode();
