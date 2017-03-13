@@ -1,7 +1,7 @@
 {
-  "name": "prettier",
+  "name": "calypso-prettier",
   "version": "0.22.0",
-  "description": "Prettier is an opinionated JavaScript formatter",
+  "description": "A fork of prettier for use with wp-calypso",
   "bin": {
     "prettier": "./bin/prettier.js"
   },
@@ -9,7 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/jlongster/prettier.git"
   },
-  "author": "James Long",
+  "author": "Samauri",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jlongster/prettier/issues"
