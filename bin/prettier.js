@@ -120,13 +120,13 @@ function getTrailingComma() {
 }
 
 const options = {
-  printWidth: getIntOption("print-width"),
-  tabWidth: getIntOption("tab-width"),
-  bracketSpacing: argv["bracket-spacing"],
-  singleQuote: argv["single-quote"],
-  jsxBracketSameLine: argv["jsx-bracket-same-line"],
-  trailingComma: getTrailingComma(),
-  parser: getParserOption()
+  tabWidth: 1,
+  printWidth: 80,
+  singleQuote: true,
+  trailingComma: "all",
+  bracketSpacing: true,
+  jsxBracketSameLine: false,
+  parser: "babylon"
 };
 
 function format(input) {

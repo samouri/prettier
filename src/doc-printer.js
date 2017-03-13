@@ -239,7 +239,7 @@ function printDocToString(doc, width, newLine) {
                   );
                 }
 
-                out.push(newLine + " ".repeat(ind));
+                out.push(newLine + "\t".repeat(ind));
                 pos = ind;
               }
               break;

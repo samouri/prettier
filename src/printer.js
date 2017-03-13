@@ -108,13 +108,13 @@ function genericPrint(path, options, printPath) {
   }
 
   if (needsParens) {
-    parts.unshift("(");
+    parts.unshift("( ");
   }
 
   parts.push(linesWithoutParens);
 
   if (needsParens) {
-    parts.push(")");
+    parts.push(" )");
   }
 
   return concat(parts);
@@ -181,7 +181,7 @@ function genericPrintNoParens(path, options, print) {
     case "ExpressionStatement":
       return concat([path.call(print, "expression"), ";"]); // Babel extension.
     case "ParenthesizedExpression":
-      return concat(["(", path.call(print, "expression"), ")"]);
+      return concat(["( ", path.call(print, "expression"), " )"]);
     case "AssignmentExpression":
       return group(
         concat([
@@ -569,7 +569,7 @@ function genericPrintNoParens(path, options, print) {
         return "{}";
       }
 
-      parts.push("{");
+      parts.push("{ ");
 
       // Babel 6
       if (hasDirectives) {
@@ -591,7 +591,7 @@ function genericPrintNoParens(path, options, print) {
       }
 
       parts.push(comments.printDanglingComments(path, options));
-      parts.push(hardline, "}");
+      parts.push(hardline, "} ");
 
       return concat(parts);
     }
@@ -640,7 +640,7 @@ function genericPrintNoParens(path, options, print) {
       ) {
         return concat([
           path.call(print, "callee"),
-          concat(["(", join(", ", path.map(print, "arguments")), ")"])
+          concat(["( ", join(", ", path.map(print, "arguments")), " )"])
         ]);
       }
 
@@ -1263,20 +1263,20 @@ function genericPrintNoParens(path, options, print) {
 
       if (shouldInline) {
         return group(
-          concat(["{", path.call(print, "expression"), lineSuffixBoundary, "}"])
+          concat(["{ ", path.call(print, "expression"), lineSuffixBoundary, " }"])
         );
       }
 
       return group(
         concat([
-          "{",
+          "{ ",
           indent(
             options.tabWidth,
             concat([softline, path.call(print, "expression")])
           ),
           softline,
           lineSuffixBoundary,
-          "}"
+          " }"
         ])
       );
     }
@@ -1973,24 +1973,24 @@ function printArgumentsList(path, options, print) {
       printed.some(willBreak) ? breakParent : "",
       conditionalGroup(
         [
-          concat(["(", join(concat([", "]), printed), ")"]),
+          concat(["( ", join(concat([", "]), printed), " )"]),
           concat([
-            "(",
+            "( ",
             join(concat([",", line]), printed.slice(0, -1)),
             printed.length > 1 ? ", " : "",
             group(util.getLast(printed), { shouldBreak: true }),
-            ")"
+            " )"
           ]),
           group(
             concat([
-              "(",
+              "( ",
               indent(
                 options.tabWidth,
                 concat([line, join(concat([",", line]), printed)])
               ),
               shouldPrintComma(options, "all") ? "," : "",
               line,
-              ")"
+              " )"
             ]),
             { shouldBreak: true }
           )
@@ -2002,14 +2002,14 @@ function printArgumentsList(path, options, print) {
 
   return group(
     concat([
-      "(",
+      "( ",
       indent(
         options.tabWidth,
         concat([softline, join(concat([",", line]), printed)])
       ),
       ifBreak(shouldPrintComma(options, "all") ? "," : ""),
       softline,
-      ")"
+      " )"
     ]),
     { shouldBreak: printed.some(willBreak) }
   );
@@ -2070,7 +2070,7 @@ function printFunctionParams(path, print, options) {
   }
 
   return concat([
-    "(",
+    "( ",
     indent(
       options.tabWidth,
       concat([softline, join(concat([",", line]), printed)])
@@ -2079,7 +2079,7 @@ function printFunctionParams(path, print, options) {
       canHaveTrailingComma && shouldPrintComma(options, "all") ? "," : ""
     ),
     softline,
-    ")"
+    " )"
   ]);
 }
 
