@@ -825,7 +825,7 @@ function genericPrintNoParens(path, options, print) {
         parts.push(
           group(
             concat([
-              "[",
+              "[ ",
               indent(
                 options.tabWidth,
                 concat([softline, concat(printedElements)])
@@ -844,7 +844,7 @@ function genericPrintNoParens(path, options, print) {
                 /* sameIndent */ true
               ),
               softline,
-              "]"
+              " ]"
             ])
           )
         );
