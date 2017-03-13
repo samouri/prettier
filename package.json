@@ -1,7 +1,7 @@
 {
-  "name": "calypso-prettier",
+  "name": "wp-prettier",
   "version": "0.22.0",
-  "description": "A fork of prettier for use with wp-calypso",
+  "description": "A fork of prettier to conform with wp-calypso styleguide",
   "bin": {
     "prettier": "./bin/prettier.js"
   },
@@ -9,7 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/jlongster/prettier.git"
   },
-  "author": "Samauri",
+  "author": "samouri",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jlongster/prettier/issues"
