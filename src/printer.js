@@ -1241,6 +1241,7 @@ function genericPrintNoParens(path, options, print, args) {
       return concat(["debugger", semi]);
     case "JSXAttribute":
       parts.push(path.call(print, "name"));
+			console.error( n.value.value );
 
       if (n.value) {
         let res;
@@ -1248,10 +1249,10 @@ function genericPrintNoParens(path, options, print, args) {
           (n.value.type === "StringLiteral" || n.value.type === "Literal") &&
           typeof n.value.value === "string"
         ) {
-          const value = n.value.extra ? n.value.extra.raw : n.value.raw;
+          const value = n.value.extra ? n.value.extra.raw : n.value.value;
           res =
             '"' +
-            value.slice(1, value.length - 1).replace(/"/g, "&quot;") +
+            value.slice(0, value.length).replace(/"/g, "&quot;") +
             '"';
         } else {
           res = path.call(print, "value");

@@ -121,14 +121,14 @@ function getTrailingComma() {
 }
 
 const options = {
-  useTabs: argv["use-tabs"],
+  useTabs: true,
   semi: argv["semi"],
-  printWidth: getIntOption("print-width"),
+  printWidth: 100,
   tabWidth: getIntOption("tab-width"),
-  bracketSpacing: argv["bracket-spacing"],
+  bracketSpacing: 'all',
   singleQuote: argv["single-quote"],
   jsxBracketSameLine: argv["jsx-bracket-same-line"],
-  trailingComma: getTrailingComma(),
+  trailingComma: 'es5',
   parser: getParserOption()
 };
 
