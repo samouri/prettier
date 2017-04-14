@@ -909,8 +909,6 @@ function genericPrintNoParens(path, options, print, args) {
     case "UnaryExpression":
       parts.push(n.operator);
 
-      parts.push(" ");
-
       parts.push(path.call(print, "argument"));
 
       return concat(parts);
