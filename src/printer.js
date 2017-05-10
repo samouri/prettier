@@ -1301,9 +1301,10 @@ function genericPrintNoParens(path, options, print, args) {
         concat([
           "{ ",
           indent(concat([softline, path.call(print, "expression")])),
+          " ",
           softline,
           lineSuffixBoundary,
-          " }"
+          "}"
         ])
       );
     }
