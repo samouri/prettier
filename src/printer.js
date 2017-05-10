@@ -908,6 +908,9 @@ function genericPrintNoParens(path, options, print, args) {
       return nodeStr(n, options);
     case "UnaryExpression":
       parts.push(n.operator);
+      if ( n.argument && n.argument.type !== "UnaryExpression" ) {
+        parts.push(' ');
+      }
 
       parts.push(path.call(print, "argument"));
 
