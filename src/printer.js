@@ -2226,7 +2226,7 @@ function printArgumentsList(path, options, print) {
               indent(concat([line, join(concat([",", line]), printed)])),
               shouldPrintComma(options, "all") ? "," : "",
               line,
-              " )"
+              ")" // do not have extra space after a line!
             ]),
             { shouldBreak: true }
           )
