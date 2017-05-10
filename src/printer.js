@@ -908,7 +908,7 @@ function genericPrintNoParens(path, options, print, args) {
       return nodeStr(n, options);
     case "UnaryExpression":
       parts.push(n.operator);
-      if ( n.argument && n.argument.type !== "UnaryExpression" ) {
+      if ( n.argument && n.argument.type !== "UnaryExpression" && ( n.operator !== '+' && n.operator !== '-') ) {
         parts.push(' ');
       }
 
@@ -2293,7 +2293,7 @@ function printFunctionParams(path, print, options, expandArg) {
   //   })                    ) => {
   //                         })
   if (expandArg) {
-    return group(concat(["(", join(", ", printed), ")"]));
+    return group(concat(["( ", join(", ", printed), " )"]));
   }
 
   // Single object destructuring should hug
