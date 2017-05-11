@@ -1,5 +1,5 @@
 {
-  "name": "wp-prettier",
+  "name": "prettier",
   "version": "1.1.6",
   "description": "A fork of prettier to conform with wp-calypso styleguide",
   "bin": {
