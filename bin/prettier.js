@@ -125,7 +125,7 @@ const options = {
   semi: argv["semi"],
   printWidth: 100,
   tabWidth: getIntOption("tab-width"),
-  bracketSpacing: 'all',
+  bracketSpacing: true,
   singleQuote: argv["single-quote"],
   jsxBracketSameLine: argv["jsx-bracket-same-line"],
   trailingComma: 'es5',
