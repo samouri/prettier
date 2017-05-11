@@ -122,11 +122,11 @@ function getTrailingComma() {
 
 const options = {
   useTabs: true,
-  semi: argv["semi"],
+  semi: true,
   printWidth: 100,
-  tabWidth: getIntOption("tab-width"),
+  tabWidth: 2,
   bracketSpacing: true,
-  singleQuote: argv["single-quote"],
+  singleQuote: true,
   jsxBracketSameLine: argv["jsx-bracket-same-line"],
   trailingComma: 'es5',
   parser: getParserOption()
