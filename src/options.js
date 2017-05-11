@@ -9,7 +9,7 @@ var defaults = {
   printWidth: 100,
   singleQuote: true,
   trailingComma: "all",
-  bracketSpacing: "es5",
+  bracketSpacing: true,
   jsxBracketSameLine: false,
   parser: "babylon",
   semi: true
